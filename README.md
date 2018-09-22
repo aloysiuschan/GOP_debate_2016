@@ -1,13 +1,11 @@
 # GOP_debate_2016
 
-The Jupyter notebook is split into three parts.
+The Jupyter notebook uses natural language processing and the multinomial Naive Bayes algorithm to predict the sentiments of tweets on the 2016 GOP presidential debate.
 
-Part 1 contains code to predict the sentiments of tweets about the GOP presidential debate 2016, via Naive Bayes classification. Prior to training the model, the text data is cleaned (e.g. by removing stopwords and punctuation).
+I first clean the tweets by removing non-alphabets, converting all words to lowercase, removing stopwords, and converting all words into their root form.
 
-Part 2 uses the AFINN lexicon to assign a sentiment value (between -5 and 5) to each word in a tweet; the sentiment values of the words are then summed to produce a sentiment value for the tweet itself. Sentiment value of the tweet is then used to classify the tweet as "Positive" or "Negative", and this classification is compared against the actual classification to evaluate the accuracy of the AFINN sentiment analysis method. Note that this method of sentiment analysis does not require the data to be split into training and test sets, since this method does not involve model training.
+After cleaning the tweets, I use them to generate a bag-of-words model. I then split the data into training and test sets, fit a multinomial Naive Bayes model to the training set, and generate sentiment predictions on the test set.
 
-Part 3 uses the VADER sentiment analysis engine to assign sentiment values to tweets; VADER attempts to measure text sentiments accurately by accounting for valence shifters such as negations (for more details, refer to this paper by the creators of VADER: http://comp.social.gatech.edu/papers/icwsm14.vader.hutto.pdf). Sentiment value of the tweet is then used to classify the tweet as "Positive" or "Negative", and this classification is compared against the actual classification to evaluate the accuracy of VADER.
+The multinomial Naive Bayes model achieved a test accuracy of 82%, which is better than the baseline accuracy of 79% (79% of all tweets were negative). The model correctly identified 51% of the positive tweets in the test set, and 89% of the negative tweets in the test set.
 
-I find that the Naive Bayes classifier (88% accuracy on the training set, 78% accuracy on the test set) outperforms the AFINN sentiment analysis method (66% accuracy on the full dataset). Surprisingly, the AFINN method outperforms the VADER method (62% accuracy on the full dataset), despite the relative sophistication of the latter method.
-
-The dataset is obtained from Crowdflower's "Data For Everyone" library (https://www.figure-eight.com/data-for-everyone/).
+The dataset was obtained from Crowdflower's "Data For Everyone" library (https://www.figure-eight.com/data-for-everyone/).
